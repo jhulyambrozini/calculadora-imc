@@ -7,9 +7,9 @@ import Form from './components/Form'
 import './App.css'
 
 export default function App() {
-  const [weight, setWeight] = useState(0)
-  const [height, setHeight] = useState(0)
-  const [result, setResult] = useState(0)
+  const [weight, setWeight] = useState<number>(0)
+  const [height, setHeight] = useState<number>(0)
+  const [result, setResult] = useState<number>(0)
 
   return (
     <div className="App">
