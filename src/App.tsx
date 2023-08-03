@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import Input from './components/Input'
+import Result from './components/Result'
+import Table from './components/Table'
+import Form from './components/Form'
 
-function App() {
+import './App.css'
+
+export default function App() {
+  const [weight, setWeight] = useState(0)
+  const [height, setHeight] = useState(0)
+  const [result, setResult] = useState(0)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Form
+        weight={weight}
+        height={height}
+        setWeight={setWeight}
+        setHeight={setHeight}
+        setResult={setResult}
+      >
+        <Input
+          labelText="Digite um peso:"
+          value={weight}
+          setVallue={setWeight}
+        />
+        <Input
+          labelText="Digite uma altura:"
+          value={height}
+          setVallue={setHeight}
+        />
+      </Form>
+      <Result result={result} />
+      <Table />
     </div>
-  );
+  )
 }
-
-export default App;
