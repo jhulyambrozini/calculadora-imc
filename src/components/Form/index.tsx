@@ -3,37 +3,44 @@ import './styles.css'
 
 type Props = {
   children: JSX.Element | JSX.Element[]
-  weight: number
-  height: number
-  setHeight: Dispatch<SetStateAction<number>>
-  setResult: Dispatch<SetStateAction<number>>
-  setWeight: Dispatch<SetStateAction<number>>
+  weight: string
+  height: string
+  setHeight: Dispatch<SetStateAction<string>>
+  setWeight: Dispatch<SetStateAction<string>>
+  setResult: Dispatch<SetStateAction<number | null>>
 }
 
 const Form = ({
   children,
   weight,
   height,
-  setHeight,
   setResult,
+  setHeight,
   setWeight
-}: Props) => {
-  const calc = () => {
-    const calcIMC = weight / (height * height)
+}: Props): JSX.Element => {
+  const calculateIMC = () => {
+    const weightInKg = parseFloat(weight)
+    const heightInMeters = parseFloat(height)
 
-    if (isNaN(calcIMC)) {
-      alert('Campos inválidos')
+    if (!isNaN(weightInKg) && !isNaN(heightInMeters)) {
+      const imc = weightInKg / (heightInMeters * heightInMeters)
+      if (!isNaN(imc) && Math.sign(imc) === 1) {
+        setResult(imc)
+        setHeight('')
+        setWeight('')
+      } else {
+        alert('Digite números válido')
+      }
     } else {
-      setResult(calcIMC)
-      setHeight(0)
-      setWeight(0)
+      alert('Digite números válido')
+      setResult(null)
     }
   }
 
   return (
     <div>
       {children}
-      <button onClick={calc}>Calcular</button>
+      <button onClick={calculateIMC}>Calcular</button>
     </div>
   )
 }

@@ -1,24 +1,25 @@
 import { useState } from 'react'
 import Input from './components/Input'
-import Result from './components/Result'
 import Table from './components/Table'
 import Form from './components/Form'
 
 import './App.css'
 
 export default function App() {
-  const [weight, setWeight] = useState<number>(0)
-  const [height, setHeight] = useState<number>(0)
-  const [result, setResult] = useState<number>(0)
+  const [weight, setWeight] = useState('')
+  const [height, setHeight] = useState('')
+  const [result, setResult] = useState<number | null>(null)
 
   return (
     <div className="App">
+      <h1>Calculadora de IMC</h1>
+
       <Form
-        weight={weight}
         height={height}
+        weight={weight}
+        setResult={setResult}
         setWeight={setWeight}
         setHeight={setHeight}
-        setResult={setResult}
       >
         <Input
           labelText="Digite um peso:"
@@ -31,7 +32,7 @@ export default function App() {
           setVallue={setHeight}
         />
       </Form>
-      <Result result={result} />
+      {result !== null && <p>Seu IMC é: {result.toFixed(2)}</p>}
       <Table />
     </div>
   )

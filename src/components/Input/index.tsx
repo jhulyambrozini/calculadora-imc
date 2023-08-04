@@ -2,21 +2,18 @@ import { SetStateAction, Dispatch } from 'react'
 import './styles.css'
 
 type Props = {
-  value: number
-  setVallue: Dispatch<SetStateAction<number>>
+  value: string
+  setVallue: Dispatch<SetStateAction<string>>
   labelText: string
 }
-
-const Input = ({ value, setVallue, labelText }: Props) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = Number(e.target.value)
-    setVallue(inputValue)
+const Input = ({ value, setVallue, labelText }: Props): JSX.Element => {
+  const handleChange = ({ target }: any) => {
+    setVallue(target.value)
   }
-
   return (
     <div>
       <label>{labelText}</label>
-      <input type="number" onChange={handleChange} value={value} />
+      <input min="0" type="number" onChange={handleChange} value={value} />
     </div>
   )
 }
