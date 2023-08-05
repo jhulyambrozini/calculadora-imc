@@ -7,8 +7,8 @@ type Props = {
   labelText: string
 }
 const Input = ({ value, setVallue, labelText }: Props): JSX.Element => {
-  const handleChange = ({ target }: any) => {
-    setVallue(target.value)
+ const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
+    setVallue(e.currentTarget.value);
   }
   return (
     <div>
